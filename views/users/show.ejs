@@ -1,0 +1,60 @@
+<% include ../partials/header %>
+
+<h1 class="text-center m-3"><%= user.username %>'s Profile</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+              <img class="card-img-top" src="<%= user.avatar %>" alt="image profile user <%= user.username %>">
+              <div class="card-body">
+                <h5 class="card-title"><%= user.firstName %> <%= user.lastName %></h5>
+                <% if(currentUser && user._id.equals(currentUser._id)){ %>
+                <p class="card-text"><%= user.email %></p>
+                <a href="/users/<%= user._id %>/edit" class="btn btn-primary">Edit your details</a>
+                <form class="d-inline" action="/users/<%= user._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger">Delete your profile</button>
+                        </form>
+                <% } %>
+              </div>
+            </div>
+        </div>
+        <% if(user.about && user.about.length > 0){ %>
+        <div class="col-md-8">
+            <h2 class="text-center">About Me</h2>
+            <p class="text-justify"><%= user.about %></p>
+        </div>
+        <% } else if(currentUser && user._id.equals(currentUser._id)) { %>
+        <div class="col-md-8">
+            <h2 class="text-center">About Me</h2>
+            <p><a href="/users/<%= currentUser.id %>/edit">Add something about you</a></p>
+        </div>
+        <% } else if(currentUser) { %>
+        <div class="col-md-8">
+            <p><a href="/users/<%= currentUser.id %>">Go to your profile</a></p>
+        </div>
+        <% } else { %>
+        <div class="col-md-8">
+            <p><a href="/login">Login to see your profile</a></p>
+            <p>or</p>
+            <p><a href="/register">Create profile</a></p>
+        </div>
+        <% } %>
+
+    </div>
+    <% if(facts && facts.length > 0){ %>
+    <h2 class="text-center m-4"><%= user.username %>'s posts:</h2>
+    <div class="row">
+        <div class="col-12">
+            <% facts.forEach(function(fact){ %>
+                  <a href="/facts/<%= fact._id %>" class="list-group-item list-group-item-action list-group-item-secondary"><%= fact.title %></a>
+            <% }); %>
+        </div>
+    </div>
+    <% } %>
+    
+</div>
+
+
+
+<% include ../partials/footer %>

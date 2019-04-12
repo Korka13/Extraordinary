@@ -1,0 +1,21 @@
+<% include ../partials/header %>
+
+<div class="container text-center">
+    <h1 class="text-center mt-3">Edit comment to <%= fact.title %></h1>
+    <div class="row">
+        
+        <div class="w-50 mx-auto my-3">
+        <form action="/facts/<%= fact._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
+              <div class="form-group">
+                <input type="text" class="form-control" value="<%= comment.text %>" name="comment[text]" required>
+              </div>
+                <button class="btn btn-lg btn-success btn-default btn-block">Submit!</button>
+              </div>
+              
+        </form>
+        </div>
+        <a href="/facts/<%= fact._id %>">Go Back</a>
+    </div>
+</div>
+
+<% include ../partials/footer %>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!--<link rel="stylesheet" type="text/css" media="screen" href="style.css" />-->
+</head>
+<body>
+    
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary py-3">
+  <a class="navbar-brand" href="/">Extraodinary Facts</a>
+  <a class="nav-link text-light" href="/facts">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <% if (!currentUser){ %>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/login">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/register">Sign Up</a>
+      </li>
+      <% } else { %>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/users/<%= currentUser.id %>">You are logged in as <%= currentUser.username %></a></li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/logout">Logout</a>
+      </li>
+      <% } %>
+    </ul>
+  </div>
+</nav>
+
+<div class="container d-flex">
+  <% if(error && error.length > 0) { %>
+    <div class="alert alert-dark text-center mx-auto mt-3" role="alert"><%= error %></div>
+  <% } %>
+  <% if(success && success.length > 0) { %>
+    <div class="alert alert-light text-center mx-auto mt-3" role="alert"><%= success %></div>
+  <% } %>
+</div>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" href="/stylesheets/landing.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+    </head>
+    <body>
+    
+    <div class="container">
+        <% if(error && error.length > 0){ %>
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="alert alert-success" role="alert">
+                <%= success %>
+            </div>
+        <% } %>
+    </div>
+    
+    <div id="landing-header">
+ 		<h1>Welcome to Extraordinary Facts!</h1>
+ 		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque odit veritatis necessitatibus in vero inventore similique hic commodi totam aliquid minus ea voluptatem at, sapiente cupiditate quos est voluptatum nihil officiis amet reprehenderit. Eius iste labore tempora natus facere voluptates impedit ipsa odit! Quisquam, reiciendis earum? Repudiandae, dolore vitae commodi doloremque esse vero quo id impedit maiores ad possimus, et reiciendis vel repellat, quam libero! Porro inventore quisquam aut hic dolor, quam repellat, soluta ex non eius dolorem voluptate minus consequuntur ducimus ullam fugit officia facere cum, nobis nisi dolorum sint ratione! Architecto expedita dolorem dolor commodi ipsa eligendi modi?</p>
+		<a href="/facts" class="btn btn-lg btn-success">View the Extraordinary facts</a>
+    </div>
+    
+    <ul class="slideshow">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+
+<% include partials/footer %>
