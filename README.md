@@ -25,7 +25,7 @@ Live demo available [here](http://extraordinary.gq)
 - Privacy & Terms of Use | About & Contacts
 - Image crop function at upload
 - Required fields in the schemas
-- Add Analytics
+- ~Add Analytics~
 - Cookie consent
 - SSL cert (Cloudflare || change hosting for your own cert)
 - Custom error messages
