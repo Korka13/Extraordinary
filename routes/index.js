@@ -259,7 +259,7 @@ router.post("/reset/:token", function(req, res) {
 router.get("/users/:id", function(req, res){
     User.findById(req.params.id, function(err, foundUser){
         if(err || !foundUser){
-            console.log(err);
+            console.log(err); // this is not getting the error, if the user does not exists it logs null
             req.flash("error", "User not found");
             res.redirect("back");
         } else {
@@ -270,7 +270,6 @@ router.get("/users/:id", function(req, res){
                     res.render("users/show", {user: foundUser, facts: foundFacts});
                 }
             });
-            
         }
     });
 });
