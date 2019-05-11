@@ -43,7 +43,7 @@ router.get("/", function(req, res) {
 
 // show register form
 router.get("/register", function(req, res) {
-    res.render("register");
+    res.render("register", {metaTitle: "Register"});
 });
 
 // sign up logic
@@ -92,7 +92,7 @@ router.post("/register", upload.single('avatar'), async function(req, res){
 router.get("/login", function(req, res){
     // console.log(req.header("Refer"));
     // req.session.returnTo = req.header("Refer");
-    res.render("login");
+    res.render("login", {metaTitle: "Login"});
 });
 
 //login logic
@@ -123,7 +123,7 @@ router.get("/logout", function(req, res) {
 
 // password reset
 router.get("/forgot", function(req, res) {
-    res.render("forgot");
+    res.render("forgot", {metaTitle: "Forgot password"});
 });
 
 router.post("/forgot", function(req, res, next) {
@@ -185,7 +185,7 @@ router.get("/reset/:token", function(req, res) {
       req.flash("error", "Password reset token is invalid or has expired.");
       return res.redirect("/forgot");
     }
-    res.render("reset", {token: req.params.token});
+    res.render("reset", {token: req.params.token, metaTitle: "Reset Password"});
   });
 });
 
@@ -267,7 +267,7 @@ router.get("/users/:id", function(req, res){
                 if(err){
                     console.log(err);
                 } else{
-                    res.render("users/show", {user: foundUser, facts: foundFacts});
+                    res.render("users/show", {user: foundUser, facts: foundFacts, metaTitle: foundUser.username + "'s profile"});
                 }
             });
         }
@@ -281,7 +281,7 @@ router.get("/users/:id/edit", middleware.checkUser, function(req, res) {
             req.flash("error", "User not found");
             res.redirect("back");
         } else {
-            res.render("users/edit", {user: foundUser});
+            res.render("users/edit", {user: foundUser, metaTitle: "Edit your profile"});
         }
     });
 });

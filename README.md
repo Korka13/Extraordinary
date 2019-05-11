@@ -26,6 +26,7 @@ Live demo available [here](http://extraordinary.gq)
 - Image crop function at upload
 - Required fields in the schemas
 - ~Add Analytics~
+- ~Dynamic page title~
 - Cookie consent
 - SSL cert (Cloudflare || change hosting for your own cert)
 - Custom error messages

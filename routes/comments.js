@@ -12,7 +12,7 @@ router.get("/new", middleware.isLoggedIn, function(req, res) {
             console.log(err);
             res.redirect("back");
         } else {
-            res.render("comments/new", {fact: foundFact});
+            res.render("comments/new", {fact: foundFact, metaTitle: "Comment on " + foundFact.title});
         }
     });
 });
@@ -60,7 +60,7 @@ router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, 
                 console.log(err);
                 res.redirect("back");
             } else {
-                res.render("comments/edit", {fact: foundFact, comment: foundComment});
+                res.render("comments/edit", {fact: foundFact, comment: foundComment, metaTitle: "Edit comment on " + foundFact.title});
             }
         });
         }

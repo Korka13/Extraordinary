@@ -44,7 +44,7 @@ router.get("/", function(req, res){
 // new work route
 
 router.get("/new", middleware.isLoggedIn, function(req, res) {
-    res.render("facts/new");
+    res.render("facts/new", {metaTitle: "Create New"});
 });
 
 // new work post route
@@ -91,7 +91,7 @@ router.get("/:id", function(req, res) {
             console.log(err);
             res.redirect("/facts");
         } else {
-            res.render("facts/show", {fact: foundFact});
+            res.render("facts/show", {fact: foundFact, metaTitle: foundFact.title});
         }
     });
 });
@@ -105,7 +105,7 @@ router.get("/:id/edit", middleware.checkFactOwnership, function(req, res){
                 req.flash("error", "Fact not found");
                 res.redirect("/facts");
             } else{
-                res.render("facts/edit", {fact: foundFact});
+                res.render("facts/edit", {fact: foundFact, metaTitle: "Edit " + foundFact.title});
             }
     });
 });
