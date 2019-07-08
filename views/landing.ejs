@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <meta charset="utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title><%= metaTitle %></title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        <link rel="stylesheet" href="/stylesheets/landing.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124901497-6"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-        
-          gtag('config', 'UA-124901497-6');
-        </script>
-    </head>
-    <body>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= metaTitle %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/landing.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124901497-6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
     
+      gtag('config', 'UA-124901497-6');
+    </script>
+  </head>
+  <body>
     <div class="container">
         <% if(error && error.length > 0){ %>
             <div class="alert alert-danger" role="alert">
@@ -32,13 +31,12 @@
             </div>
         <% } %>
     </div>
-    
     <div id="landing-header">
- 		<h1>Welcome to Extraordinary Facts!</h1>
- 		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque odit veritatis necessitatibus in vero inventore similique hic commodi totam aliquid minus ea voluptatem at, sapiente cupiditate quos est voluptatum nihil officiis amet reprehenderit. Eius iste labore tempora natus facere voluptates impedit ipsa odit! Quisquam, reiciendis earum? Repudiandae, dolore vitae commodi doloremque esse vero quo id impedit maiores ad possimus, et reiciendis vel repellat, quam libero! Porro inventore quisquam aut hic dolor, quam repellat, soluta ex non eius dolorem voluptate minus consequuntur ducimus ullam fugit officia facere cum, nobis nisi dolorum sint ratione! Architecto expedita dolorem dolor commodi ipsa eligendi modi?</p>
-		<a href="/facts" class="btn btn-lg btn-success">View the Extraordinary facts</a>
+   		<h1>Welcome to Extraordinary Facts!</h1>
+   		<p class="text-center">If something "Extraordinary" happened to you, or you want to browse through some "Extraordinary facts" happened to others, you are in the right place!</p>
+   		<p class="text-center">Did you win a bottle flip challange? You spotted an UFO? Your cat learned how to pee in a water closet? Have you been doing yoga during an amazing sunset? You boiled an egg and then you disovered it had two yolkes? Every person has something extraordinary to share, and here at Extraordinary Facts we want to make them all public!</p>
+  		<a href="/facts" class="btn btn-lg btn-success">Enter!</a>
     </div>
-    
     <ul class="slideshow">
       <li></li>
       <li></li>
@@ -46,8 +44,7 @@
       <li></li>
       <li></li>
     </ul>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-</body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  </body>
 </html>

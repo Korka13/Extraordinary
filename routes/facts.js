@@ -1,35 +1,13 @@
-var express = require("express");
-var router  = express.Router();
-var Fact = require("../models/fact");
-var middleware = require("../middleware");
-var multer = require("multer");
-var storage = multer.diskStorage({
-  filename: function(req, file, callback) {
-    callback(null, Date.now() + file.originalname);
-  }
-});
+var express     = require("express"),
+    router      = express.Router(),
+    Fact        = require("../models/fact"),
+    middleware  = require("../middleware"),
+    configs     = require("../configs"),
+    upload      = configs.upload,
+    cloudinary  = configs.cloudinary;
 
-var imageFilter = function (req, file, cb) {
-    // accept image files only
-    var type = file.mimetype;
-    var typeArray = type.split("/");
-    if (typeArray[0] !== "image") {
-        req.fileValidationError = "The uploaded file is not an image";
-        return cb(null, false, req.fileValidationError);
-    }
-    cb(null, true);
-};
 
-var upload = multer({ storage: storage, fileFilter: imageFilter});
-
-var cloudinary = require("cloudinary");
-cloudinary.config({ 
-  cloud_name: "korka", 
-  api_key: process.env.CLOUDINARYAPIKEY, 
-  api_secret: process.env.CLOUDINARYAPISECRET
-});
-
-// works index route
+// facts index route
 router.get("/", function(req, res){
     Fact.find({}, function(err, facts){
        if(err){
@@ -41,13 +19,13 @@ router.get("/", function(req, res){
     });
 });
 
-// new work route
+// new fact route
 
 router.get("/new", middleware.isLoggedIn, function(req, res) {
     res.render("facts/new", {metaTitle: "Create New"});
 });
 
-// new work post route
+// new fact post route
 
 router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, res) {
     if(req.fileValidationError){
@@ -82,7 +60,7 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
     });
 });
 
-// WORKS SHOW ROUTE
+// FACTS SHOW ROUTE
 
 router.get("/:id", function(req, res) {
     Fact.findById(req.params.id).populate("comments").exec(function(err, foundFact){
@@ -96,7 +74,7 @@ router.get("/:id", function(req, res) {
     });
 });
 
-// Works edit routes
+// facts edit routes
 
 router.get("/:id/edit", middleware.checkFactOwnership, function(req, res){
         Fact.findById(req.params.id, function(err, foundFact){
@@ -141,7 +119,7 @@ router.put("/:id", middleware.checkFactOwnership, upload.single("image"), functi
     });
 });
 
-// WORK DESTROY
+// FACT DESTROY
 
 router.delete("/:id", middleware.checkFactOwnership, function(req, res){
     Fact.findById(req.params.id, async function(err, foundFact){

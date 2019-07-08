@@ -5,18 +5,15 @@ var express             = require("express"),
     flash               = require("connect-flash"),
     passport            = require("passport"),
     LocalStrategy       = require("passport-local"),
-    expressSanitizer    = require("express-sanitizer"),
     methodOverride      = require("method-override"),
-    Fact                = require("./models/fact"),
-    Comment             = require("./models/comment"),
-    User                = require("./models/user"),
-    back                = require('express-back');
+    User                = require("./models/user");
     
 require('dotenv').config();
 
 var indexRoutes   = require("./routes/index"),
     factRoutes    = require("./routes/facts"),
-    commentRoutes = require("./routes/comments");
+    commentRoutes = require("./routes/comments"),
+    profileRoutes = require("./routes/profile");
 
 const databaseUri = process.env.DATABASE;
 
@@ -35,7 +32,7 @@ app.use(require("express-session")({
     resave: false,
     saveUninitialized: false
 }));
-app.use(back());
+
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -53,6 +50,7 @@ app.use(function(req, res, next){
 app.use("/", indexRoutes);
 app.use("/facts", factRoutes);
 app.use("/facts/:id/comments/", commentRoutes);
+app.use("/users", profileRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Server started...");

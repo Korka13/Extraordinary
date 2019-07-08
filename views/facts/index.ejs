@@ -1,41 +1,36 @@
 <% include ../partials/header %>
 
 <div class="container">
-    <div class="jumbotron mt-5 border">
-      <h1 class="display-3">All Extraordinary Facts</h1>
-      <p class="lead">See what extraordinary happened</p>
-      <hr class="my-4">
-      <p>bla bla bla</p>
-      <a class="btn btn-success btn-lg border" href="/facts/new" role="button">Post your fact</a>
-    </div>
+  <div class="jumbotron mt-5 border">
+    <h1 class="display-3">All Extraordinary Facts</h1>
+    <p class="lead">See what extraordinary happened</p>
+    <hr class="my-4">
+    <p>Browse all the extraordinary stuff that other people shared with us, leave a comment to their post to share your thoughts</p>
+    <p>Don't forget to share with the community some extraordinary facts that happened to you as well!</p>
+    <p>Choose a title, upload an image (if you could not capture the extraordinary diem, just browse the internet looking for the best replacement), choose the most appropriate category and talk about what happened... Delight Us!!</p>
+    <a class="btn btn-success btn-lg border" href="/facts/new" role="button">Post your fact</a>
+  </div>
 </div>
     
     
 <div class="container">
-    <div class="row">
-        
-        <% facts.forEach(function(fact){ %>
-        
-            <div class="col-12 col-sm-6 col-md-4 col-xl-3 d-flex align-items-between">
-                
-                <div class="card my-5 rounded border-0">
-                  <img src="<%= fact.image %>" class="card-img-top rounded-top my-auto" alt="<%= fact.title %>">
-                  <div class="card-body border border-top-0 d-flex flex-column">
-                      <div class="mt-auto">
-                            <h5 class="card-title"><%= fact.title %></h5>
-                            <h6 class="card-subtitle mb-2 text-muted"><%= fact.category %></h6>
-                            <p class="card-text"><%- fact.description.substring(0, 100) %>...</p>
-                            <a href="/facts/<%= fact._id %>" class="btn btn-success">Read more</a>
-                      </div>
-                  </div>
-                </div>
+  <div class="row">
+    <% facts.forEach(function(fact){ %>
+      <div class="col-12 col-sm-6 col-md-4 col-xl-3 d-flex align-items-between">
+        <div class="card my-5 rounded border-0">
+          <img src="<%= fact.image %>" class="card-img-top rounded-top my-auto" alt="<%= fact.title %>">
+          <div class="card-body border border-top-0 d-flex flex-column">
+            <div class="mt-auto">
+              <h5 class="card-title"><%= fact.title %></h5>
+              <h6 class="card-subtitle mb-2 text-muted"><%= fact.category %></h6>
+              <p class="card-text"><%- fact.description.substring(0, 100) %>...</p>
+              <a href="/facts/<%= fact._id %>" class="btn btn-success">Read more</a>
             </div>
-
-        <% }); %>
-        
-    </div>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+  </div>
 </div>
-    
-
 
 <% include ../partials/footer %>

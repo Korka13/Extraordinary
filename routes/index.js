@@ -1,38 +1,13 @@
-var express = require("express");
-var router  = express.Router();
-var passport = require("passport");
-var User = require("../models/user");
-var Fact = require("../models/fact");
-var middleware = require("../middleware");
-var async = require("async");
-var nodemailer = require("nodemailer");
-var crypto = require("crypto");
-var multer = require("multer");
-var storage = multer.diskStorage({
-  filename: function(req, file, callback) {
-    callback(null, Date.now() + file.originalname);
-  }
-});
-
-var imageFilter = function (req, file, cb) {
-    // accept image files only
-    var type = file.mimetype;
-    var typeArray = type.split("/");
-    if (typeArray[0] !== "image") {
-        req.fileValidationError = "The uploaded file is not an image";
-        return cb(null, false, req.fileValidationError);
-    }
-    cb(null, true);
-};
-
-var upload = multer({ storage: storage, fileFilter: imageFilter});
-
-var cloudinary = require("cloudinary");
-cloudinary.config({ 
-  cloud_name: "korka", 
-  api_key: process.env.CLOUDINARYAPIKEY,
-  api_secret: process.env.CLOUDINARYAPISECRET
-});
+var express     = require("express"),
+    router      = express.Router(),
+    passport    = require("passport"),
+    User        = require("../models/user"),
+    async       = require("async"),
+    nodemailer  = require("nodemailer"),
+    crypto      = require("crypto"),
+    configs     = require("../configs"),
+    upload      = configs.upload,
+    cloudinary  = configs.cloudinary;
 
 // Landing route
 router.get("/", function(req, res) {
@@ -106,14 +81,6 @@ router.post("/login", function(req,res,next){
         successFlash:"Welcome back "+req.body.username+"!"
     })(req,res,next);});
 
-// router.post("/login", passport.authenticate("local", 
-//     {
-//         successReturnToOrRedirect: "/works",
-//         failureRedirect: "/login",
-//         failureFlash: true
-//     }), function(req, res){
-// });
-
 // logout route
 router.get("/logout", function(req, res) {
     req.logout();
@@ -121,7 +88,10 @@ router.get("/logout", function(req, res) {
     res.redirect("back");
 });
 
-// password reset
+// PASSWORD RESET
+
+// forgot
+
 router.get("/forgot", function(req, res) {
     res.render("forgot", {metaTitle: "Forgot password"});
 });
@@ -178,6 +148,8 @@ router.post("/forgot", function(req, res, next) {
     res.redirect("/forgot");
   });
 });
+
+// reset
 
 router.get("/reset/:token", function(req, res) {
   User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
@@ -251,94 +223,6 @@ router.post("/reset/:token", function(req, res) {
       }
     res.redirect("/facts");
   });
-});
-
-
-//user profile
-
-router.get("/users/:id", function(req, res){
-    User.findById(req.params.id, function(err, foundUser){
-        if(err || !foundUser){
-            console.log(err); // this is not getting the error, if the user does not exists it logs null
-            req.flash("error", "User not found");
-            res.redirect("back");
-        } else {
-            Fact.find({"author.id": req.params.id}, function(err, foundFacts){
-                if(err){
-                    console.log(err);
-                } else{
-                    res.render("users/show", {user: foundUser, facts: foundFacts, metaTitle: foundUser.username + "'s profile"});
-                }
-            });
-        }
-    });
-});
-
-router.get("/users/:id/edit", middleware.checkUser, function(req, res) {
-    User.findById(req.params.id, function(err, foundUser){
-        if(err){
-            console.log(err);
-            req.flash("error", "User not found");
-            res.redirect("back");
-        } else {
-            res.render("users/edit", {user: foundUser, metaTitle: "Edit your profile"});
-        }
-    });
-});
-
-router.put("/users/:id", middleware.checkUser, upload.single("avatar"), function(req, res){
-  if(req.fileValidationError){
-        req.flash("error", req.fileValidationError);
-        return res.redirect("back");
-    }
-    User.findById(req.params.id, async function(err, foundUser){
-        if(err){
-            console.log(err);
-            req.flash("error", err.message);
-            res.redirect("back");
-        } else {
-            if(req.file){
-              try {
-                if(foundUser.avatarId){
-                  await cloudinary.v2.uploader.destroy(foundUser.avatarId);
-                }
-                  var result = await cloudinary.v2.uploader.upload(req.file.path);
-                  foundUser.avatarId = result.public_id;
-                  foundUser.avatar = result.secure_url;
-              } catch(err){
-                req.flash("error", err.message);
-                res.redirect("back");
-              }
-            }
-            foundUser.firstName = req.body.firstName;
-            foundUser.lastName = req.body.lastName;
-            foundUser.email = req.body.email;
-            foundUser.about = req.body.about;
-            foundUser.save();
-            req.flash("success", "Changes saved!");
-            res.redirect("/users/" + req.params.id);
-        }
-    });
-});
-
-router.delete("/users/:id",middleware.checkUser, function(req, res){
-    User.findById(req.params.id, async function(err, foundUser){
-        if(err){
-            req.flash("error", err.message);
-            console.log(err);
-            res.redirect("/users/" + req.params.id);
-        } try {
-          if(foundUser.avatarId){
-            await cloudinary.v2.uploader.destroy(foundUser.avatarId);
-          }
-            foundUser.remove();
-            req.flash("success", "We are sorry to see you going away " + foundUser.username + "! You'll be always welcome back!");
-            res.redirect("/facts");
-        } catch(err){
-              req.flash("error", err.message);
-              return res.redirect("back");
-        }
-    });
 });
 
 module.exports = router;

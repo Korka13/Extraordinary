@@ -1,5 +1,5 @@
 body {
-    background-color: #000;
+  background-color: #000;
 }
 
 #landing-header {
@@ -7,16 +7,18 @@ body {
   margin: 0 10%;
   position: relative;
   text-align: center;
-  padding-top: 30vh;
+  padding: 30vh 0;
 }
 
 #landing-header h1 {
+  font-size: 4rem;
   color: #fff;
   text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
 
 }
 
 #landing-header p {
+  font-size: 1.2rem;
   color: #fff;
   text-align: justify;
   text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
@@ -49,22 +51,22 @@ body {
 }
 
 .slideshow li:nth-child(1) { 
-  background-image: url(https://cdn.vox-cdn.com/uploads/chorus_image/image/49706687/Screen_20Shot_202016-05-26_20at_2012.28.33_20PM.0.png) 
+  background-image: url(../img/bottle-flip.jpg) 
 }
 .slideshow li:nth-child(2) { 
-  background-image: url(https://upload.wikimedia.org/wikipedia/commons/6/6e/Moonbeam_UFO.JPG);
+  background-image: url(../img/ufo.jpg);
   animation-delay: 10s; 
 }
 .slideshow li:nth-child(3) { 
-  background-image: url(https://i.pinimg.com/originals/b8/4b/bd/b84bbd73a58885385f32bc4b96f40137.jpg);
+  background-image: url(../img/cat-pee.jpg);
   animation-delay: 20s; 
 }
 .slideshow li:nth-child(4) { 
-  background-image: url(https://i.ytimg.com/vi/5_eSRwElkb8/maxresdefault.jpg);
+  background-image: url(../img/yoga-sunset.jpg);
   animation-delay: 30s; 
 }
 .slideshow li:nth-child(5) { 
-  background-image: url(https://farm8.static.flickr.com/7022/6818066253_8f28a31e5b_b.jpg);
+  background-image: url(../img/double-yolked-egg.jpg);
   animation-delay: 40s; 
 }
 

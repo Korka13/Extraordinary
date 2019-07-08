@@ -1,28 +1,28 @@
 <% include ../partials/header %>
 
-<h1 class="text-center m-3">Edit your profile, <%= user.username %></h1>
-<form action="/users/<%= user._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
-<div class="container form-group">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card">
-              <img class="card-img-top" src="<%= user.avatar %>" alt="image profile user <%= user.username %>">
-              <div class="card-body">
-                  <label for="avatar">Avatar</label>
-                    <input class="w-100 form-control" type="file"  id="avatar" name="avatar" accept="image/*">
-                    <input class="w-100 form-control" type="text" value="<%= user.firstName %>" placeholder="First Name" name="firstName">
-                    <input class="w-100 form-control" type="text" value="<%= user.lastName %>" placeholder="Last Name" name="lastName">
-                    <input class="w-100 form-control" type="email" value="<%= user.email %>" placeholder="Recovery email" name="email" required>
-              </div>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <h2 class="text-center">Write something about you:</h2>
-            <textarea rows="10" class="form-control" name="about"><%= user.about %></textarea>
-        </div>
-    </div>
-    <button class="btn btn-lg btn-success btn-default btn-block m-5">Save</button>
-</div>
-</form>
+	<h1 class="text-center m-3">Edit your profile, <%= user.username %></h1>
+	<form action="/users/<%= user._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+		<div class="container form-group">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card">
+						<img class="card-img-top" src="<%= user.avatar %>" alt="image profile user <%= user.username %>">
+						<div class="card-body">
+							<label for="avatar">Avatar</label>
+							<input class="w-100 form-control" type="file"  id="avatar" name="avatar" accept="image/*">
+							<input class="w-100 form-control" type="text" value="<%= user.firstName %>" placeholder="First Name" name="firstName">
+							<input class="w-100 form-control" type="text" value="<%= user.lastName %>" placeholder="Last Name" name="lastName">
+							<input class="w-100 form-control" type="email" value="<%= user.email %>" placeholder="Recovery email" name="email" required>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<h2 class="text-center">Write something about you:</h2>
+					<textarea rows="10" class="form-control" name="about"><%= user.about %></textarea>
+				</div>
+			</div>
+			<button class="btn btn-lg btn-success btn-default btn-block m-5">Save</button>
+		</div>
+	</form>
 
 <% include ../partials/footer %>

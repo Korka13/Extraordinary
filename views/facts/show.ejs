@@ -1,57 +1,55 @@
 <% include ../partials/header %>
 
 <div class="container my-5">
-    <div class="row">
-        <div class="col-md-4 d-none d-md-block">
-            <div class="list-group mr-4">
-              <a href="/users/<%= fact.author.id %>" class="list-group-item list-group-item-action list-group-item-secondary"><%= fact.author.username %>'s Profile</a>
-              <a href="#" class="list-group-item list-group-item-action list-group-item-secondary">Suggested reading</a>
-              <a href="#" class="list-group-item list-group-item-action list-group-item-secondary">Suggested event</a>
-              <a href="#" class="list-group-item list-group-item-action list-group-item-secondary">Other by AUTHOR</a>
-            </div>
+<div class="row">
+  <div class="col-md-4 d-none d-md-block">
+    <div class="list-group mr-4">
+      <a href="/users/<%= fact.author.id %>" class="list-group-item list-group-item-action list-group-item-secondary"><%= fact.author.username %>'s Profile</a>
+      <a href="/facts/new" class="list-group-item list-group-item-action list-group-item-secondary">Post a new Fact!</a>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card ml-md-4">
+      <img src="<%= fact.image %>" class="card-img-top h-75" alt="<%= fact.title %>">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <h5 class="card-title"><%= fact.title %></h5>
+          <h5 class="card-title ml-5"><%= fact.category %></h5>
         </div>
-        <div class="col-md-8">
-            <div class="card ml-md-4">
-                <img src="<%= fact.image %>" class="card-img-top h-75" alt="<%= fact.title %>">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h5 class="card-title"><%= fact.title %></h5>
-                        <h5 class="card-title ml-5"><%= fact.category %></h5>
-                    </div>
-                    <h6 class="card-subtitle my-2 text-muted">Submitted by <%= fact.author.username %></h6>
-                    <% if(currentUser && fact.author.id.equals(currentUser._id)){ %>
-                        <a href="/facts/<%= fact._id %>/edit" class="btn btn-warning">Edit</a>
-                        <form class="d-inline" action="/facts/<%= fact._id %>?_method=DELETE" method="POST">
-                            <button class="btn btn-danger">Delete</button>
-                        </form>
-                    <% } %>
-                    <p class="card-text"><%= fact.description %></p>
-                </div>
-            </div>
+        <h6 class="card-subtitle my-2 text-muted">Submitted by <%= fact.author.username %></h6>
+        <% if(currentUser && fact.author.id.equals(currentUser._id)){ %>
+          <a href="/facts/<%= fact._id %>/edit" class="btn btn-warning">Edit</a>
+          <form class="d-inline" action="/facts/<%= fact._id %>?_method=DELETE" method="POST">
+            <button class="btn btn-danger">Delete</button>
+          </form>
+        <% } %>
+        <p class="card-text"><%= fact.description %></p>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="row">
+    <div class="col">
+      <div class="card my-5">
+        <div class="card-header text-right">
+          <a href="/facts/<%= fact._id %>/comments/new" class="btn btn-success ml-auto">Leave a comment!</a>
         </div>
+        <div class="card-body">
+          <% fact.comments.forEach(function(comment){ %>
+            <h5 class="card-title"><%= comment.author.username %></h5>
+            <p class="card-text"><%= comment.text %></p>
+            <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
+              <a class="btn btn-sm btn-warning" href="/facts/<%= fact._id %>/comments/<%= comment._id %>/edit">Edit</a>
+              <form class="d-inline" action="/facts/<%= fact._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                <button class="btn btn-sm btn-danger">Delete</button>
+              </form>
+            <% } %>
+            <hr>
+          <% }); %>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="card my-5">
-                    <div class="card-header text-right">
-                        <a href="/facts/<%= fact._id %>/comments/new" class="btn btn-success ml-auto">Leave a comment!</a>
-                    </div>
-                    <div class="card-body">
-                        <% fact.comments.forEach(function(comment){ %>
-                            <h5 class="card-title"><%= comment.author.username %></h5>
-                            <p class="card-text"><%= comment.text %></p>
-                            <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
-                            <a class="btn btn-sm btn-warning" href="/facts/<%= fact._id %>/comments/<%= comment._id %>/edit">Edit</a>
-                            <form class="d-inline" action="/facts/<%= fact._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
-                                <button class="btn btn-sm btn-danger">Delete</button>
-                            </form>
-                            <% } %>
-                            <hr>
-                        <% }); %>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <% include ../partials/footer %>
