@@ -2,7 +2,7 @@
 
 The place where you can share what extraordinary happened to you
 
-Live demo available [here](http://extraordinary.gq)
+Live demo available [here](http://extraordinary.cau.cx)
 
 <hr>
 
